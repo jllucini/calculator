@@ -30,5 +30,20 @@ pipeline {
                		reportName: "Checkstyle Report" ])
       	    }
     	}
+	stage("Package"){
+	    steps {
+		sh "./gradle build"
+	    }
+	}
+	stage("Docker Build"){
+	    steps {
+		sh "docker build -t localhost:5000/calculator:1 ."
+	    }
+	}
+	stage("Docker Push"){
+	    steps {
+		sh "docker push localhost:5000/calculator:1"
+	    }
+	}
     }
 }
