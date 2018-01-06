@@ -47,12 +47,12 @@ pipeline {
 	}
 	stage("Deploy to Staging"){
 	    steps {
-		sh "docker run -d --rm -p 8765:8080 --name calculator localhost:5000/calculator"
+		sh "docker run -d --rm -p 8765:8080 --name calculator localhost:5000/calculator:1"
 	    }
 	}
         stage("Acceptance test") {
       	    steps {
-		sleep 60
+		sleep 30
 		sh "./acceptance_test.sh"
       	    }
     	}	
