@@ -45,5 +45,16 @@ pipeline {
 		sh "docker push localhost:5000/calculator:1"
 	    }
 	}
+	stage("Deploy to Staging"){
+	    steps {
+		sh "docker run -d --rm -p 8765:8080 --name calculator localhost:5000/calculator"
+	    }
+	}
+        stage("Acceptance test") {
+      	    steps {
+		sleep 60
+		sh "./acceptance_test.sh"
+      	    }
+    	}	
     }
 }
