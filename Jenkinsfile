@@ -55,11 +55,11 @@ pipeline {
 		sleep 60
 		sh "/bin/bash -xe ./acceptance_test.sh"
       	    }
-    	}	
-	post {
-	    always {
-		sh "docker stop calculator"
-	    }
+    	}
+    }	
+    post {
+        always {
+   	    sh "docker stop calculator"
 	}
     }
 }
